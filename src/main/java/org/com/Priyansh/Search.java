@@ -42,7 +42,7 @@ public class Search extends HttpServlet {
 
 
         request.setAttribute("results", results);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        request.getRequestDispatcher("/search.jsp").forward(request, response);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
