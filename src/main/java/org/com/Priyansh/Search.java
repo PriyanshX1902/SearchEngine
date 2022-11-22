@@ -24,17 +24,16 @@ public class Search extends HttpServlet {
         ArrayList<SearchResult> results = new ArrayList<SearchResult>();
         try{
             Connection connection = DatabaseConnection.getConnection();
-            ResultSet resultSet = connection.createStatement().executeQuery("select name, link, (length(lower(pageData))-length(replace(lower(pageData), '"+keyword+"', '')))/length('"+keyword+"') as countoccurence from search order by countoccurence desc limit 30;");
+            ResultSet resultSet = connection.createStatement().executeQuery("select pagetitle, pagelink, (length(lower(pageData))-length(replace(lower(pageData), '"+keyword+"', '')))/length('"+keyword+"') as countoccurence from pages order by countoccurence desc limit 30;");
             while (resultSet.next()){
                 SearchResult searchResult = new SearchResult();
-                searchResult.setName(resultSet.getString("name"));
-                searchResult.setLink(resultSet.getString("link"));
+                searchResult.setName(resultSet.getString("pagetitle"));
+                searchResult.setLink(resultSet.getString("pagelink"));
                 results.add(searchResult);
             }
-            PreparedStatement preparedStatement = connection.prepareStatement("Insert into history values (?, ?, ?)");
-            preparedStatement.setString(1, "Search");
-            preparedStatement.setString(2, keyword);
-            preparedStatement.setString(3, "http://localhost:8080/SimpleSearchEngine/Search?keyword="+keyword);
+            PreparedStatement preparedStatement = connection.prepareStatement("Insert into history values (?, ?)");
+            preparedStatement.setString(1, keyword);
+            preparedStatement.setString(2, "https://priyanshsearchengine.herokuapp.com/Search?keyword="+keyword);
             preparedStatement.executeUpdate();
         }catch (SQLException sqlException){
             System.out.println(sqlException);

@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class = "homeButton">
-        <form action = "http://localhost:8080/SimpleSearchEngine/">
+        <form action = "https://priyanshsearchengine.herokuapp.com/">
         <button type = "submit">Back to home page </button>
         </form>
     </div>
@@ -18,7 +18,6 @@
     <div class = "resultTable">
         <table border = 2>
             <tr>
-                <td>Type</td>
                 <td>Name</td>
                 <td>Link</td>
             </tr>
@@ -27,7 +26,6 @@
                 for(HistoryResult result: results){
             %>
                     <tr>
-                        <td><%out.println(result.getType());%></td>
                         <td><%out.println(result.getName());%></td>
                         <td><a href = "<%out.println(result.getLink());%>"><%out.println(result.getLink());%></a></td>
                     </tr>

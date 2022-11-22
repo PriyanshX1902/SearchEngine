@@ -25,7 +25,6 @@ public class History extends HttpServlet {
             ResultSet resultSet = connection.createStatement().executeQuery("select * from history;");
             while (resultSet.next()){
                 HistoryResult historyResult = new HistoryResult();
-                historyResult.setType(resultSet.getString("type"));
                 historyResult.setName(resultSet.getString("name"));
                 historyResult.setLink(resultSet.getString("link"));
                 results.add(historyResult);
